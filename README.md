@@ -16,16 +16,16 @@ Dapat dilihat bahwa data yang ditambahkan diatas telah ada di dalam tabel. <br>
 ![3](https://github.com/sitiafiyah/UTS_PBO_Penitipan/blob/master/3.JPG)
 
 **ScreenShoot 4** <br>
-Ketika memilih pada bari s yang ber-ID 1 maka akan ditampilkan di form pengisian data. <br>
-![4](https://github.com/sitiafiyah/UTS_PBO_Penitipan/blob/master/4.JPG)
+Ketika memilih pada baris yang ber-ID 6 maka akan ditampilkan di form pengisian data. <br>
+![11](https://github.com/sitiafiyah/UTS_PBO_Penitipan/blob/master/11.JPG)
 
 **ScreenShoot 5** <br>
 Contoh proses penggunaan tombol Delete. <br>
-![5](https://github.com/sitiafiyah/UTS_PBO_Penitipan/blob/master/5.JPG)
+![12](https://github.com/sitiafiyah/UTS_PBO_Penitipan/blob/master/12.JPG)
 
 **ScreenShoot 6** <br>
 Data yang telah kita Delete sudah terhapus. <br>
-![6](https://github.com/sitiafiyah/UTS_PBO_Penitipan/blob/master/6.JPG)
+![13](https://github.com/sitiafiyah/UTS_PBO_Penitipan/blob/master/13.JPG)
 
 **ScreenShoot 7** <br>
 Kotak ini akan muncul ketika Anda meng-klik button PRINT. Ini pada menu GENERAL. <br>
