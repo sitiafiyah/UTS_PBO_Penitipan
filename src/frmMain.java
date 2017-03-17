@@ -44,7 +44,6 @@ public class frmMain extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         txtNoResi = new javax.swing.JTextField();
         txtNoPol = new javax.swing.JTextField();
         rdMobil = new javax.swing.JRadioButton();
@@ -65,10 +64,6 @@ public class frmMain extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblData = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
-        txtHarga = new javax.swing.JTextField();
-        txtJumlahHari = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -96,11 +91,6 @@ public class frmMain extends javax.swing.JFrame {
         jLabel5.setText("Tanggal Masuk");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(40, 380, 100, 30);
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel6.setText("Harga");
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(40, 540, 100, 30);
         getContentPane().add(txtNoResi);
         txtNoResi.setBounds(200, 250, 240, 30);
         getContentPane().add(txtNoPol);
@@ -243,37 +233,6 @@ public class frmMain extends javax.swing.JFrame {
         getContentPane().add(jLabel10);
         jLabel10.setBounds(40, 420, 100, 30);
 
-        txtHarga.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtHargaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtHarga);
-        txtHarga.setBounds(200, 540, 240, 30);
-
-        txtJumlahHari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtJumlahHariActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtJumlahHari);
-        txtJumlahHari.setBounds(200, 460, 240, 30);
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel11.setText("Jumlah Hari");
-        getContentPane().add(jLabel11);
-        jLabel11.setBounds(40, 460, 100, 30);
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton1.setText("Lihat Harga");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(40, 500, 100, 30);
-
         jButton2.setText("Refresh");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -317,6 +276,12 @@ public class frmMain extends javax.swing.JFrame {
         String keluar = dateFormat.format(TanggalKeluar.getDate());
         String JK = "";
 
+        Date tglmasuk = TanggalMasuk.getDate();
+        Date tglkeluar = TanggalKeluar.getDate();
+        long miliseconds = tglkeluar.getTime() - tglmasuk.getTime();
+        int days = (int) (miliseconds/(1000*60*60*24));
+        int total = days*3000;
+        
           if (rdMobil.isSelected()){
                 JK = "Mobil";
             }else{
@@ -329,13 +294,12 @@ public class frmMain extends javax.swing.JFrame {
             txtNoPol.getText().equals("")||
             JK.equals("")||
                 masuk.equals("") ||
-                keluar.equals("") ||
-            txtHarga.getText().equals("")){
+                keluar.equals("")){
             JOptionPane.showMessageDialog(this, "Harap Lengkapi Data", "Error", JOptionPane.WARNING_MESSAGE);
         }else{
             String SQL ="INSERT INTO `tb_data`(`id`,`NamaPetugas`, `NoResi`, `NoPol`, `JenisKendaraan`, `TanggalMasuk`, `TanggalKeluar`, `Harga`)" 
                     + "VALUES(NULL,'"+txtNama.getText()+"','"+txtNoResi.getText()+"','"+txtNoPol.getText()+"','"+JK+"','"+masuk+"',"
-                    + "'"+keluar+"','"+txtHarga.getText()+"')";
+                    + "'"+keluar+"','"+total+"')";
 
             int status = KoneksiDB.execute(SQL);
             
@@ -379,32 +343,13 @@ public class frmMain extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PrintActionPerformed
 
-    private void txtHargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHargaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtHargaActionPerformed
-
     private void ClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearActionPerformed
          txtNama.setText("");
          txtNoResi.setText("");
          txtNoPol.setText("");
          buttonGroup1.clearSelection();
-         txtJumlahHari.setText("");
-         txtHarga.setText("");
         // TODO add your handling code here:
     }//GEN-LAST:event_ClearActionPerformed
-
-    private void txtJumlahHariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJumlahHariActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtJumlahHariActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int hitung = Integer.parseInt(txtJumlahHari.getText());
-        int jumlah = 0;
-        
-        jumlah = hitung*3000;
-        txtHarga.setText(String.valueOf(jumlah));
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         selectData();
@@ -453,7 +398,7 @@ public class frmMain extends javax.swing.JFrame {
             }
             
             
-            txtHarga.setText(tblData.getValueAt(baris,7).toString());
+           String tarif = tblData.getValueAt(baris,7).toString();
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_tblDataMouseClicked
@@ -506,18 +451,15 @@ public class frmMain extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser TanggalKeluar;
     private com.toedter.calendar.JDateChooser TanggalMasuk;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
@@ -527,8 +469,6 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdMobil;
     private javax.swing.JRadioButton rdMotor;
     private javax.swing.JTable tblData;
-    private javax.swing.JTextField txtHarga;
-    private javax.swing.JTextField txtJumlahHari;
     private javax.swing.JLabel txtNama;
     private javax.swing.JTextField txtNoPol;
     private javax.swing.JTextField txtNoResi;
