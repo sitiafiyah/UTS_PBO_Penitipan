@@ -41,7 +41,6 @@ public class frmMain extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -71,7 +70,6 @@ public class frmMain extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        txtid = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jButton3 = new javax.swing.JButton();
@@ -83,11 +81,6 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         getContentPane().setLayout(null);
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setText("No ID");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(40, 210, 120, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("NOPOL");
@@ -238,6 +231,9 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tblData);
+        if (tblData.getColumnModel().getColumnCount() > 0) {
+            tblData.getColumnModel().getColumn(0).setHeaderValue("id");
+        }
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(470, 210, 610, 360);
@@ -287,14 +283,6 @@ public class frmMain extends javax.swing.JFrame {
         getContentPane().add(jButton2);
         jButton2.setBounds(640, 610, 100, 40);
 
-        txtid.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtidActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtid);
-        txtid.setBounds(200, 210, 240, 30);
-
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel12.setText("No Resi");
         getContentPane().add(jLabel12);
@@ -324,6 +312,9 @@ public class frmMain extends javax.swing.JFrame {
 
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
         //String tanggal = ((JTextField)jDateChooser.getDateEditor().getUiComponent()).getText();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String masuk = dateFormat.format(TanggalMasuk.getDate());
+        String keluar = dateFormat.format(TanggalKeluar.getDate());
         String JK = "";
 
           if (rdMobil.isSelected()){
@@ -332,21 +323,23 @@ public class frmMain extends javax.swing.JFrame {
                 JK = "Motor";
             }
         
-        if (txtid.getText().equals("") ||
+        if (
             txtNama.getText().equals("") ||
             txtNoResi.getText().equals("") ||
             txtNoPol.getText().equals("")||
             JK.equals("")||
+                masuk.equals("") ||
+                keluar.equals("") ||
             txtHarga.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Harap Lengkapi Data", "Error", JOptionPane.WARNING_MESSAGE);
         }else{
             String SQL ="INSERT INTO `tb_data`(`id`,`NamaPetugas`, `NoResi`, `NoPol`, `JenisKendaraan`, `TanggalMasuk`, `TanggalKeluar`, `Harga`)" 
-                    + "VALUES('"+txtid.getText()+"','"+txtNama.getText()+"','"+txtNoResi.getText()+"','"+txtNoPol.getText()+"','"+JK+"','"+TanggalMasuk+"',"
-                    + "'"+TanggalKeluar+"','"+txtHarga.getText()+"')";
+                    + "VALUES(NULL,'"+txtNama.getText()+"','"+txtNoResi.getText()+"','"+txtNoPol.getText()+"','"+JK+"','"+masuk+"',"
+                    + "'"+keluar+"','"+txtHarga.getText()+"')";
 
             int status = KoneksiDB.execute(SQL);
             
-            if(status == 0){
+            if(status == 1){
                 JOptionPane.showMessageDialog(this, "Data berhasil ditambahkan", "Sukses", JOptionPane.INFORMATION_MESSAGE);
                 selectData();
             }else{
@@ -419,10 +412,6 @@ public class frmMain extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void txtidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtidActionPerformed
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
        String user1 = Login.user;
        txtNama.setText(user1);
@@ -432,8 +421,7 @@ public class frmMain extends javax.swing.JFrame {
     private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
         int baris =tblData.getSelectedRow();
         if (baris != -1){
-           txtid.setText(tblData.getValueAt(baris,0).toString());
-           txtid.setEditable(false);
+           
            txtNama.setText(tblData.getValueAt(baris,1).toString());
            txtNoResi.setText(tblData.getValueAt(baris,2).toString());
            txtNoPol.setText(tblData.getValueAt(baris,3).toString());
@@ -526,7 +514,6 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -545,7 +532,6 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JLabel txtNama;
     private javax.swing.JTextField txtNoPol;
     private javax.swing.JTextField txtNoResi;
-    private javax.swing.JTextField txtid;
     // End of variables declaration//GEN-END:variables
 
     private void selectData() {
@@ -574,7 +560,7 @@ public class frmMain extends javax.swing.JFrame {
                 dtm.addRow(data);
             }
         }catch (SQLException ex){
-            Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
+           // Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
         }
         tblData.setModel(dtm);//To change body of generated methods, choose Tools | Templates.
     }
