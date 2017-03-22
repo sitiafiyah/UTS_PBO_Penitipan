@@ -3,29 +3,28 @@
 **ScreenShoot Aplikasi :**
 
 **ScreenShoot 1** <br>
-Tampilan awal ketika anda me-running aplikasi ini. Dan disini Anda diminta untuk memasukkan username dan nama.<br>
+Tampilan awal ketika anda me-running aplikasi ini. Dan disini Anda diminta untuk memasukkan username dan nama. Disini saya login menggunakan username siti dan nantinya otomatis dijadikan nama petugas.<br>
 ![1](https://github.com/sitiafiyah/UTS_PBO_Penitipan/blob/master/1.JPG)
 
 **ScreenShoot 2** <br>
-Username yang tadi akan menjadikan anda sebagai nama petugas. Dan ketika Anda mengisi data dan menekan tombol SAVE akan
-terlihat proses seperti ini. Dan data otomatis akan tertambahkan di kolom dan di database <br>
-![2](https://github.com/sitiafiyah/UTS_PBO_Penitipan/blob/master/2.JPG)
+Dan ini adalah contoh ketika saya login menggunakan username Rozikin, sehingga Rozikin ini akan otomatis digunakan untuk nama petugas. Dan ketika Anda mengisi data dan menekan tombol SAVE akan terlihat proses seperti ini. Dan data otomatis akan tertambahkan di kolom dan di database <br>
+![2](https://github.com/sitiafiyah/UTS_PBO_Penitipan/blob/master/14.JPG)
 
 **ScreenShoot 3** <br>
-Dapat dilihat bahwa data yang ditambahkan diatas telah ada di dalam tabel. <br>
-![3](https://github.com/sitiafiyah/UTS_PBO_Penitipan/blob/master/3.JPG)
+Dapat dilihat bahwa data yang ditambahkan diatas telah ada di dalam tabel dengan ID 11. <br>
+![3](https://github.com/sitiafiyah/UTS_PBO_Penitipan/blob/master/15.JPG)
 
 **ScreenShoot 4** <br>
-Ketika memilih pada baris yang ber-ID 6 maka akan ditampilkan di form pengisian data. <br>
-![11](https://github.com/sitiafiyah/UTS_PBO_Penitipan/blob/master/11.JPG)
+Ketika memilih pada baris yang ber-ID 5 maka akan ditampilkan di form pengisian data. <br>
+![11](https://github.com/sitiafiyah/UTS_PBO_Penitipan/blob/master/16.JPG)
 
 **ScreenShoot 5** <br>
 Contoh proses penggunaan tombol Delete. <br>
-![12](https://github.com/sitiafiyah/UTS_PBO_Penitipan/blob/master/12.JPG)
+![12](https://github.com/sitiafiyah/UTS_PBO_Penitipan/blob/master/16.JPG)
 
 **ScreenShoot 6** <br>
-Data yang telah kita Delete sudah terhapus. <br>
-![13](https://github.com/sitiafiyah/UTS_PBO_Penitipan/blob/master/13.JPG)
+Data yang telah kita Delete sudah terhapus. Data yang ber-ID 5 telah hilang. <br>
+![13](https://github.com/sitiafiyah/UTS_PBO_Penitipan/blob/master/17.JPG)
 
 **ScreenShoot 7** <br>
 Kotak ini akan muncul ketika Anda meng-klik button PRINT. Ini pada menu GENERAL. <br>
@@ -41,7 +40,7 @@ Button PRINT pada menu Appearance. <br>
 
 **ScreenShoot 10** <br>
 Inilah hasil dari button Print dalam bentuk pdf. <br>
-![10](https://github.com/sitiafiyah/UTS_PBO_Penitipan/blob/master/10.JPG)
+![10](https://github.com/sitiafiyah/UTS_PBO_Penitipan/blob/master/18.JPG)
 
 * Identitas : 
     * Nama : Siti Afiyah 
