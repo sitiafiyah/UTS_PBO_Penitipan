@@ -42,6 +42,10 @@ Button PRINT pada menu Appearance. <br>
 Inilah hasil dari button Print dalam bentuk pdf. <br>
 ![10](https://github.com/sitiafiyah/UTS_PBO_Penitipan/blob/master/18.JPG)
 
+**ScreenShoot 11** <br>
+Penambahan button search. Ketika difungsikan akan menampilkan data sesuai data (tanggal masuk dan tanggal keluar) yang dimasukan. <br>
+![19](https://github.com/sitiafiyah/UTS_PBO_Penitipan/blob/master/19.PNG)
+
 * Identitas : 
     * Nama : Siti Afiyah 
     * Kelas : XI RPL 5 
