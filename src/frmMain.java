@@ -68,6 +68,13 @@ public class frmMain extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jButton3 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        tglklr = new com.toedter.calendar.JDateChooser();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        tglmsk = new com.toedter.calendar.JDateChooser();
+        cari = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -154,7 +161,7 @@ public class frmMain extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("SketchFlow Print", 1, 18)); // NOI18N
         jLabel8.setText("ISIKAN DATA");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(160, 150, 180, 30);
+        jLabel8.setBounds(170, 180, 180, 30);
 
         Save.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         Save.setText("Save");
@@ -226,7 +233,7 @@ public class frmMain extends javax.swing.JFrame {
         }
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(470, 210, 610, 360);
+        jScrollPane1.setBounds(470, 300, 580, 250);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel10.setText("Tanggal Keluar");
@@ -261,6 +268,38 @@ public class frmMain extends javax.swing.JFrame {
         });
         getContentPane().add(jButton3);
         jButton3.setBounds(940, 610, 100, 40);
+        getContentPane().add(jPanel3);
+        jPanel3.setBounds(110, 170, 250, 60);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel2.setText("Tanggal Keluar");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(780, 180, 120, 30);
+        getContentPane().add(tglklr);
+        tglklr.setBounds(880, 180, 170, 30);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel6.setText("Pencarian Tanggal Penitipan");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(470, 140, 240, 30);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel9.setText("Tanggal Masuk");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(470, 180, 120, 30);
+        getContentPane().add(tglmsk);
+        tglmsk.setBounds(560, 180, 170, 30);
+
+        cari.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cari.setText("Search");
+        cari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cariActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cari);
+        cari.setBounds(470, 230, 120, 40);
 
         setBounds(0, 0, 1109, 721);
     }// </editor-fold>//GEN-END:initComponents
@@ -297,7 +336,8 @@ public class frmMain extends javax.swing.JFrame {
                 keluar.equals("")){
             JOptionPane.showMessageDialog(this, "Harap Lengkapi Data", "Error", JOptionPane.WARNING_MESSAGE);
         }else{
-            String SQL ="INSERT INTO `tb_data`(`id`,`NamaPetugas`, `NoResi`, `NoPol`, `JenisKendaraan`, `TanggalMasuk`, `TanggalKeluar`, `Harga`)" 
+            String SQL ="INSERT INTO `tb_data`(`id`,`NamaPetugas`, `NoResi`, `NoPol`, `JenisKendaraan`, `TanggalMasuk`, `TanggalKeluar`,"
+                    + " `Harga`)" 
                     + "VALUES(NULL,'"+txtNama.getText()+"','"+txtNoResi.getText()+"','"+txtNoPol.getText()+"','"+JK+"','"+masuk+"',"
                     + "'"+keluar+"','"+total+"')";
 
@@ -348,6 +388,8 @@ public class frmMain extends javax.swing.JFrame {
          txtNoResi.setText("");
          txtNoPol.setText("");
          buttonGroup1.clearSelection();
+         TanggalMasuk.setDate(null);
+         TanggalKeluar.setDate(null);
         // TODO add your handling code here:
     }//GEN-LAST:event_ClearActionPerformed
 
@@ -408,6 +450,48 @@ public class frmMain extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariActionPerformed
+        
+        DefaultTableModel tabelTampil1 = new DefaultTableModel();
+        tabelTampil1.addColumn("id");
+        tabelTampil1.addColumn("NamaPetugas");
+        tabelTampil1.addColumn("NoResi");
+        tabelTampil1.addColumn("NoPol");
+        tabelTampil1.addColumn("JenisKendaraan");
+        tabelTampil1.addColumn("TanggalMasuk");
+        tabelTampil1.addColumn("TanggalKeluar");
+        tabelTampil1.addColumn("Harga");
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String msk = dateFormat.format(tglmsk.getDate());
+        String klr = dateFormat.format(tglklr.getDate());
+        
+        try{
+           
+            String sql = "Select * from tb_data where TanggalMasuk like '%" + msk + "%'" +
+            "and TanggalKeluar like '%" + klr + "%'";
+            ResultSet rs = KoneksiDB.executeQuery(sql);
+            while (rs.next()) {
+            tabelTampil1.addRow(new Object[]{
+                rs.getString(1),
+                rs.getString(2),
+                rs.getString(3),
+                rs.getString(4),
+                rs.getString(5),
+                rs.getString(6),
+                rs.getString(7),
+                rs.getString(8),
+            });
+            }
+            tblData.setModel(tabelTampil1);
+
+                }catch (SQLException ex){
+            }
+        
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cariActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -451,24 +535,31 @@ public class frmMain extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser TanggalKeluar;
     private com.toedter.calendar.JDateChooser TanggalMasuk;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton cari;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JRadioButton rdMobil;
     private javax.swing.JRadioButton rdMotor;
     private javax.swing.JTable tblData;
+    private com.toedter.calendar.JDateChooser tglklr;
+    private com.toedter.calendar.JDateChooser tglmsk;
     private javax.swing.JLabel txtNama;
     private javax.swing.JTextField txtNoPol;
     private javax.swing.JTextField txtNoResi;
@@ -504,4 +595,5 @@ public class frmMain extends javax.swing.JFrame {
         }
         tblData.setModel(dtm);//To change body of generated methods, choose Tools | Templates.
     }
+
 }
